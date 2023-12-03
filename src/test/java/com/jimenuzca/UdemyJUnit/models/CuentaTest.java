@@ -1,7 +1,6 @@
 package com.jimenuzca.UdemyJUnit.models;
 
 import com.jimenuzca.UdemyJUnit.exceptions.DineroInsuficienteException;
-import com.jimenuzca.UdemyJUnit.models.Cuenta;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * una expresion lambda
  * fail() nos permite forzar el error
  * ANNOTATIONS:
- * @DisplayName nos permite ponerl eun nombre mas descriptivo al test.Al ejecutarlo vemos que el nombre que toma es este
+ * @DisplayName nos permite ponerle un nombre mas descriptivo al test.Al ejecutarlo vemos que el nombre que toma es este
  * (soporta caracteres especiales, emojis)
  * @Disable nos permite deshabilitar el test, de esta manera al correr la prueba completa no lo evalua. fijarse que lo
  * marca con el simbolo de prohibido al ejecutar y tambien indica el total de las que paso y las que ignoró.
@@ -44,7 +43,7 @@ class CuentaTest {
     @Test
     @DisplayName("Probando nombre de la cuenta")
     //indicarle al runner que lo tiene que ejecutar
-    public void testNombreCuenta() {
+    void testNombreCuenta() {
         Cuenta cuenta = new Cuenta();
         cuenta.setPersona("Andres");
         String esperado = "Andres";
@@ -55,7 +54,7 @@ class CuentaTest {
     }
 
     @Test
-    public void testNombreCuentaII() {
+    void testNombreCuentaII() {
         Cuenta cuenta = new Cuenta("Cecilia", new BigDecimal("100.12345"));
         String esperado = "Cecilia";
         String real = cuenta.getPersona();
@@ -65,7 +64,7 @@ class CuentaTest {
     }
 
     @Test
-    public void testSaldoCuenta() {
+    void testSaldoCuenta() {
         Cuenta cuenta = new Cuenta("Andres", new BigDecimal("1000.12345"));
         //validamos que el saldo no sea nulo
         // le agreamos un mensaje propio mas descriptivo
@@ -232,6 +231,7 @@ class CuentaTest {
 
         //usamos el assertAll para poder evaluar y rastrear TODOS los assert de este test
         //en cada lambda tenes que tener una assertions, si tiene varias lineas usar {};
+        //el tercer parámetro que se le pasa es el mensaje de error personalizado
         assertAll(
                 () -> assertEquals("1575", cuentaGraciela.getSaldo().toPlainString(), () -> "ERROR"),
                 () -> assertEquals("2175", cuentaCecilia.getSaldo().toPlainString()),
